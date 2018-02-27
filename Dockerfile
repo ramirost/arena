@@ -10,4 +10,5 @@ RUN yarn --production
 
 COPY . /opt/arena/
 
-CMD ["yarn", "start"]
+#CMD ["yarn", "start"]
+ENTRYPOINT ["/opt/arena/entrypoint.sh"]
