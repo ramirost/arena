@@ -3,6 +3,10 @@ const fs = require("fs");
 function run() {
 	if(!process.env.REDIS_CONNECTION)
 		throw new Error("REDIS_CONNECTION not defined");
+	if(!process.env.QUEUE_NAME)
+		throw new Error("QUEUE_NAME not defined");
+	if(!process.env.QUEUE_PREFIX)
+		throw new Error("QUEUE_PREFIX not defined");
 
 	try {
 		var t = process.env.REDIS_CONNECTION.split("://")[1].split(":");
@@ -12,11 +16,11 @@ function run() {
 		config = {
 			queues: [
 				{
-				name: "2",
-				port: port,
-				host: host,
-				hostId: host,
-				prefix: "bull"
+					name: process.env.QUEUE_NAME,
+					port: port,
+					host: host,
+					hostId: host,
+					prefix: process.env.QUEUE_PREFIX
 				}
 			]
 		};
